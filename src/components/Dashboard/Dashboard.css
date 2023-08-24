@@ -1,0 +1,49 @@
+thead,tbody,tr,th,td{
+    color: #003049;
+    padding: .5rem ;
+   
+}
+
+.filepond--credits{
+    display: none;
+}
+
+.img-input-field{
+    border: 1px dashed black;
+    padding: 100px 0;
+    height: 200px;
+    text-align: center;
+    border-radius: 5px;
+    background:#ECF0F1;
+}
+
+#filepond--drop-label-6162megdd{
+    margin-top:100px;
+}
+
+
+
+#table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #table td, #table th {
+    border: 1px solid red;
+    padding: 8px;
+  }
+  
+  #table tr:nth-child(even){background-color: red;}
+  
+  #table tr:hover {background-color: red;}
+  
+  #table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: black;
+  }
+
+
