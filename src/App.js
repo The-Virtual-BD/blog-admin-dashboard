@@ -32,28 +32,28 @@ function App() {
 		<QueryClientProvider client={queryClient}>
 			<CollectionContext>
 				<Routes>
-					<Route path="/" element={<RequireAuth><AdminDashboard /></RequireAuth>}/>
-						
+					<Route path="/" element={<RequireAuth><AdminDashboard /></RequireAuth>} />
+
 					<Route path="/admin-dashboard" element={<RequireAuth><AdminDashboard /></RequireAuth>}>
 
-						<Route index path="/admin-dashboard/dashboard" element={<Dashboard />}/>
+						<Route index path="/admin-dashboard/dashboard" element={<Dashboard />} />
 
 						<Route path="/admin-dashboard/news" element={<Newses />}></Route>
 						<Route path="/admin-dashboard/news/view/:id" element={<NewsDetails />}></Route>
 						<Route path="/admin-dashboard/news/edit/:id" element={<NewsEdit />}></Route>
 
 						<Route path="/admin-dashboard/articales" element={<Projects />}></Route>
-						<Route path="/admin-dashboard/projects/view/:id" element={<ProjectsDetails />}></Route>
-						<Route path="/admin-dashboard/projects/edit/:id" element={<ProjectEdit />}></Route>
-						
+						<Route path="/admin-dashboard/articale/view/:id" element={<ProjectsDetails />}></Route>
+						<Route path="/admin-dashboard/articale/edit/:id" element={<ProjectEdit />}></Route>
+
 
 						<Route path="/admin-dashboard/teams" element={<Teams />}></Route>
 						<Route path="/admin-dashboard/teams/view/:id" element={<TeamDetails />}></Route>
 						<Route path="/admin-dashboard/teams/edit/:id" element={<TeamEdit />}></Route>
 
-					    <Route path="/admin-dashboard/publications" element={<Publications />}></Route>
-					    <Route path="/admin-dashboard/publications/view/:id" element={<PublicationDetails />}></Route>
-					    <Route path="/admin-dashboard/publications/edit/:id" element={<PublicationEdit />}></Route>
+						<Route path="/admin-dashboard/publications" element={<Publications />}></Route>
+						<Route path="/admin-dashboard/publications/view/:id" element={<PublicationDetails />}></Route>
+						<Route path="/admin-dashboard/publications/edit/:id" element={<PublicationEdit />}></Route>
 
 					</Route>
 

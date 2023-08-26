@@ -8,7 +8,7 @@ export const fetchProjects = async () => {
     return data?.data;
 };
 
-//Fetch News
+/* //Fetch News
 export const fetchNews = async () => {
     const res = await fetch(`${baseURL}/news/all`);
     const data = await res.json();
@@ -28,6 +28,6 @@ export const fetchPublication = async () => {
     const res = await fetch(`${baseURL}/publications/all`);
     const data = await res.json();
     return data?.data;
-};
+}; */
 
 

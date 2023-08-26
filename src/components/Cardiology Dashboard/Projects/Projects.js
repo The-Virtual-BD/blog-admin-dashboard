@@ -50,7 +50,12 @@ const AddProjects = () => {
 		// Validate description field
 
 		if (!proCategory) {
-			setCateError("*Category is required.");
+			toast.error("Select Category Type");
+			setSubmitting(false);
+			return;
+		}
+		if (!articaleType) {
+			toast.error("Select Articale Type");
 			setSubmitting(false);
 			return;
 		}
@@ -266,11 +271,11 @@ const ViewProjects = () => {
 	const sortProducts = [...products].reverse();
 
 	const handleProductView = (id) => {
-		navigate(`/admin-dashboard/projects/view/${id}`);
+		navigate(`/admin-dashboard/articale/view/${id}`);
 	};
 
 	const handleEditBtn = (id) => {
-		navigate(`/admin-dashboard/projects/edit/${id}`);
+		navigate(`/admin-dashboard/articale/edit/${id}`);
 	};
 
 	//Handle Delete Post
@@ -279,7 +284,7 @@ const ViewProjects = () => {
 
 		if (procced) {
 			axios
-				.delete(`${baseURL}/projects/${id}`)
+				.delete(`${baseURL}/articale/${id}`)
 				.then((response) => {
 					// console.log(`Deleted post with ID ${id}`);
 					toast.success("Deleted successfully!");

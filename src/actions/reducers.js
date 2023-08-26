@@ -22,12 +22,12 @@ const CollectionContext = ({ children }) => {
 
 	const [user] = useAuthState(auth);
 	const token = window.localStorage.getItem("token");
-	
-	const { data: products, isLoading: productsLoading } = useQuery("projects",fetchProjects);
-	const { data: news, isLoading: newsLoading } = useQuery("news", fetchNews);
+
+	const { data: products, isLoading: productsLoading } = useQuery("projects", fetchProjects);
+	/* const { data: news, isLoading: newsLoading } = useQuery("news", fetchNews);
 	const { data: team, isLoading: teamLoading } = useQuery("team", fetchTeam);
-	const { data: publications, isLoading: publicationsLoading } = useQuery("publication",fetchPublication);
-		
+	const { data: publications, isLoading: publicationsLoading } = useQuery("publication",fetchPublication); */
+
 	const value = {
 		menuOpen,
 		setMenuOpen,
@@ -41,14 +41,9 @@ const CollectionContext = ({ children }) => {
 		setIsViewTeam,
 		products,
 		productsLoading,
-		news,
-		newsLoading,
-		team,
-		teamLoading,
 		isViewPubli,
 		setIsViewPubli,
-		publications,
-		publicationsLoading,
+
 	};
 
 	return <APPContext.Provider value={value}>{children}</APPContext.Provider>;

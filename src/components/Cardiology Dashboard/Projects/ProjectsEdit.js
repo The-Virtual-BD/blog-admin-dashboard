@@ -10,20 +10,25 @@ const ProjectEdit = () => {
 	const [sinPro, setSinPro] = useState({});
 	const [loading, setLoading] = useState(true);
 
-	const [proNamE, setProName] = useState("");
+	const [titlE, setTitle] = useState("");
+	const [artiImG, setProImg] = useState(null);
+	const [datE, setDate] = useState("");
 	const [proCategorY, setProCategory] = useState("");
-	const [proImG, setProImg] = useState("");
-	const [proDesC, setProDesc] = useState("");
+	const [linK, setLink] = useState("");
+	const [authorS, setAuthors] = useState("");
+	const [desC, setProDesc] = useState("");
+	const [articaleTypE, setArticaleType] = useState("");
 
 	const [oldMemberImgURL, setOldMemberImgURL] = useState("");
 	const [submitting, setSubmitting] = useState(false);
+	const [isDate, setIsDate] = useState(false);
 
 	useEffect(() => {
-		fetch(`${baseURL}/projects/${id}`)
+		fetch(`${baseURL}/articale/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setSinPro(data);
-				setProDesc(data.proDesc);
+				setProDesc(data.desc);
 				setLoading(false);
 			});
 	}, [id]);
@@ -31,52 +36,63 @@ const ProjectEdit = () => {
 	//Update Value
 	useEffect(() => {
 		if (sinPro) {
-			setProName(sinPro.proName);
+			setTitle(sinPro.title);
+			setDate(sinPro.date);
+			setArticaleType(sinPro.articaleType);
+			setLink(sinPro.link);
 			setProCategory(sinPro.proCategory);
-			setOldMemberImgURL(sinPro.proImg);
+			setAuthors(sinPro.authors);
+			setOldMemberImgURL(sinPro.artiImg);
 		}
 	}, [sinPro]);
 
 	// console.log(sinPro);
 
-	//Handle Product Add Form
+	//Handle Product Edit Form
 	const handleProductUpdateForm = (e) => {
 		e.preventDefault();
 		setSubmitting(true);
 
+
+
+
 		try {
 			const productForm = new FormData();
-			productForm.append("proName", proNamE);
+			productForm.append("title", titlE);
 			productForm.append("proCategory", proCategorY);
-			productForm.append("proDesc", proDesC);
+			productForm.append("date", datE);
+			productForm.append("articaleType", articaleTypE);
+			productForm.append("link", linK);
+			productForm.append("authors", authorS);
+			productForm.append("desc", desC);
 
 			// Check if a new image is selected
-			if (proImG) {
-				productForm.append("proImg", proImG);
+			if (artiImG) {
+				productForm.append("artiImg", artiImG);
 			} else {
-				productForm.append("proImg", oldMemberImgURL);
+				productForm.append("artiImg", oldMemberImgURL);
 			}
 
-			const url = `${baseURL}/projects/${id}`;
+			const url = `${baseURL}/articale/${id}`;
 			axios
 				.put(url, productForm)
 				.then((res) => {
 					console.log(res);
-					toast.success("Project Updated Successfully");
+					toast.success("Articale Updated Successfully");
 					e.target.reset();
 					setSubmitting(false);
 				})
 				.catch((error) => console.log(error));
 		} catch (error) {
 			console.log(error);
-			toast.error("Project Updated Failed");
+			toast.error("Articale Updated Failed");
 			setSubmitting(false);
 		}
 	};
 
 	if (loading) {
 		return <div>Loading...</div>;
-	}
+	};
 
 	return (
 		<div className="bg-bgclr text-primary min-h-screen">
@@ -88,19 +104,47 @@ const ProjectEdit = () => {
 						onSubmit={handleProductUpdateForm}
 						className="p-3 flex flex-col items-center justify-center mt-10 gap-4 w-full"
 					>
+
+
 						<div className="flex flex-col lg:flex-row items-center gap-3 w-full">
-							<div className="form-control w-full  ">
+							<div className="form-control w-full lg:w-1/2 ">
 								<input
 									type="text"
-									placeholder="Name"
-									value={proNamE}
-									onChange={(e) => setProName(e.target.value)}
+									placeholder="Title"
+									value={titlE}
+									onChange={(e) => setTitle(e.target.value)}
 									required
 									className="input  w-full  bg-bgclr"
 								/>
 							</div>
 
-							<div className="form-control w-full  ">
+							<div className="form-control w-full lg:w-1/2 ">
+								<input
+									type={`${isDate ? "date" : "text"}`}
+									placeholder="Publication Date"
+									value={datE}
+									onChange={(e) => setDate(e.target.value)}
+									onFocus={() => setIsDate(true)}
+									required
+									className="input  w-full  bg-bgclr"
+								/>
+							</div>
+						</div>
+
+
+						<div className="flex flex-col lg:flex-row items-center gap-3 w-full">
+							<div className="form-control w-full lg:w-1/2 ">
+								<input
+									type="text"
+									placeholder="Download Link"
+									value={linK}
+									onChange={(e) => setLink(e.target.value)}
+									required
+									className="input  w-full  bg-bgclr"
+								/>
+							</div>
+
+							<div className="form-control w-full lg:w-1/2 ">
 								<select
 									className="select select-bordered w-full bg-bgclr"
 									onChange={(e) => setProCategory(e.target.value)}
@@ -110,11 +154,44 @@ const ProjectEdit = () => {
 									<option disabled selected>
 										Select Category
 									</option>
-									<option value={"current"}>Current Project</option>
-									<option value={"past"}>Past Project</option>
+									<option value={"research"}>Research Articale</option>
+									<option value={"public"}>Publi Articale</option>
+									<option value={"common"}>Common Articale</option>
 								</select>
+
 							</div>
 						</div>
+
+
+						<div className="flex flex-col lg:flex-row items-center gap-3 w-full">
+							<div className="form-control w-full lg:w-1/2 ">
+								<input
+									type="text"
+									placeholder="Authors"
+									value={authorS}
+									onChange={(e) => setAuthors(e.target.value)}
+									required
+									className="input  w-full  bg-bgclr"
+								/>
+							</div>
+
+							<div className="form-control w-full lg:w-1/2 ">
+								<select
+									className="select select-bordered w-full bg-bgclr"
+									onChange={(e) => setArticaleType(e.target.value)}
+									value={articaleTypE}
+									required
+								>
+									<option disabled selected>
+										Select Type
+									</option>
+									<option value={"open"}>Open Access</option>
+									<option value={"limited"}>Limited Access</option>
+								</select>
+
+							</div>
+						</div>
+
 
 						<div className="w-full">
 							<SunEditor
@@ -143,7 +220,7 @@ const ProjectEdit = () => {
 								onChange={(content) => {
 									setProDesc(content);
 								}}
-								defaultValue={proDesC}
+								defaultValue={desC}
 								required
 								setDefaultStyle="font-family: 'Open Sans', sans-serif; font-size: 14px; text-align:start; min-height:200px; background:#ECF0F1"
 							/>

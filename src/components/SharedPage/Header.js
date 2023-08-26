@@ -47,7 +47,7 @@ const Header = () => {
 					<div className="flex items-center gap-5">
 						<Link to={"/admin-dashboard/dashboard"}>
 							{/* <img src={logo2} alt="talents" className="my-5 block" /> */}
-							<h1 className="text-red-700 font-bold">Blog website</h1>
+							<h1 className="text-blue font-bold">Blog website</h1>
 						</Link>
 
 						{currentPath !== "/sign-in" && (
